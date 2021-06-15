@@ -136,7 +136,8 @@
 
 						@foreach ($products as $product) 
 						<!-- Product -->
-					{{--I call function image from Product.php --}}
+						<!-- I call function image from Product.php -->
+				
 
 						@php 
 						$image = '';
@@ -148,10 +149,19 @@
 						@endphp
 						<div class="product">
 							<div class="product_image"><img src="/images/{{ $image }}" alt="{{$product->title}}"></div>
-							<div class="product_extra product_new"><a href="categories.html">New</a></div>
+							<div class="product_extra product_new"><a href="categories.html">{{$product->category['title']}}</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="{{route('showProduct',['category',$product->id])}}">{{$product->title}} </a></div>
-								<div class="product_price">{{$product->price}}</div>
+								<div class="product_title"><a href="{{route('showProduct',['cat',$product->id])}}">{{$product->title}} </a></div>
+									
+									
+									
+									@if($product->new_price != null)
+										<div style="text-decoration:line-through">${{$product->price}}</div>
+										<div class="product_price">${{$product->new_price}}</div>
+									@else
+										<div class="product_price">${{$product->price}}</div>
+									@endif
+								
 							</div>
 						</div>
 						@endforeach
